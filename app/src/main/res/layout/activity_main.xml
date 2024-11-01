@@ -7,13 +7,99 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <EditText
+        android:id="@+id/search_movie_edit_text"
+        android:layout_width="200.dp"
+        android:layout_height="48dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="40.dp"
+        android:hint="Search for a movie"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/search_movie_button"
+        android:layout_width="150.dp"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:layout_marginTop="12.dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_movie_edit_text" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movie_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_movie_button" />
+
+    <LinearLayout
+        android:id="@+id/movie_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:textAlignment="center"
+        android:layout_marginTop="48.dp"
+        android:layout_marginHorizontal="48.dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/search_movie_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/movie_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="24.sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/movie_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.dp"
+            android:textSize="18.sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/movie_overview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.dp"
+            android:textSize="18.sp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48.dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_movie_button"/>
+
+    <TextView
+        android:id="@+id/error"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12.dp"
+        android:textStyle="bold"
+        android:textSize="18.sp"
+        android:textAlignment="center"
+        android:text="An error occcurred, try again"
+        android:layout_marginBottom="24.dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
