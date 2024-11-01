@@ -1,5 +1,7 @@
 package ar.edu.unicen.seminarioentregable.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unicen.seminarioentregable.ddl.data.MovieDTO
@@ -7,6 +9,7 @@ import ar.edu.unicen.seminarioentregable.ddl.data.TheMovieRepository
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
 import ar.edu.unicen.seminarioentregable.ddl.models.MovieAPIResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -27,6 +30,9 @@ class MainViewModel @Inject constructor(
     private val _movie = MutableStateFlow<Movie?>(null)
     val movie = _movie.asStateFlow()
 
+    private val _posterUrl = MutableLiveData<String?>(null)
+    val posterUrl: LiveData<String?> = _posterUrl
+
     fun getMovie(
         title: String
     ){
@@ -42,9 +48,18 @@ class MainViewModel @Inject constructor(
                 val moviesDTO = movieApiResponse.results
                 val movies = moviesDTO.map { it.toMovie() }
                 _movie.value = movies.firstOrNull()
+
+                val posterPath = _movie.value?.poster_path
+                if(posterPath != null){
+                    _posterUrl.value = "https://image.tmdb.org/t/p/w500$posterPath"
+                }else{
+                    null
+                }
+
             }else{
                 _error.value = true
             }
+            delay(2000)
             _loading.value = false
         }
     }

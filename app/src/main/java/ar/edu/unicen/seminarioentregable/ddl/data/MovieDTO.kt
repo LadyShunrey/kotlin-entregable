@@ -9,14 +9,17 @@ class MovieDTO(
     @SerializedName("original_language")
     val original_language: String,
     @SerializedName("overview")
-    val overview: String
+    val overview: String,
+    @SerializedName("poster_path")
+    val poster_path: String?
 ) {
 
     fun toMovie(): Movie {
         return Movie(
             title = title,
             original_language = original_language,
-            overview = overview
+            overview = overview,
+            poster_path = poster_path
         )
     }
 }

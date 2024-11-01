@@ -39,6 +39,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -57,6 +58,8 @@ dependencies {
     implementation(libs.retrofit.gson)
 
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
 
     testImplementation(libs.junit)

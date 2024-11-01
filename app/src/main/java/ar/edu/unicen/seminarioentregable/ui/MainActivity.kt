@@ -10,6 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import ar.edu.unicen.seminarioentregable.R
 import ar.edu.unicen.seminarioentregable.databinding.ActivityMainBinding
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -64,6 +65,19 @@ class MainActivity : AppCompatActivity() {
             val title = binding.searchMovieEditText.text.toString()
             if (title != null) {
                 viewModel.getMovie(title)
+            }
+        }
+
+        viewModel.posterUrl.observe(this) { posterUrl ->
+            if (posterUrl != null) {
+                binding.moviePoster.visibility = android.view.View.VISIBLE
+                Glide.with(this)
+                    .load(posterUrl)
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.error_image)
+                    .into(binding.moviePoster)
+            }else{
+                binding.moviePoster.visibility = android.view.View.INVISIBLE
             }
         }
 
