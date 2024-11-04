@@ -11,10 +11,9 @@ interface TheMovieDBAPI {
         @Query("query") query: String,
         @Query("api_key") apiKey: String = "b71b3f041ea5177c645079a3318d06d"
     ): Response<MovieAPIResponse>
+
+    @GET("/3/movie/popular")
+    suspend fun getPopularMovies(
+        @Query("api_key") apiKey: String = "b71b3f041ea5177c645079a3318d06d"
+    ): Response<MovieAPIResponse>
 }
-
-
-
-//        @Query("include_adult") includeAdult: Boolean = false,
-//        @Query("language") language: String = "en-US",
-//        @Query("page") page: Int = 1

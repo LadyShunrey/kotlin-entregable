@@ -24,6 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.MoviePLPActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.MoviePDPActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

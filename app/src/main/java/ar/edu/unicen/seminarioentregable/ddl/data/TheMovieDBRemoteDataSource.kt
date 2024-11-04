@@ -31,4 +31,16 @@ class TheMovieDBRemoteDataSource @Inject constructor(
             }
         }
     }
+
+    suspend fun getPopularMovies(): List<Movie>? {
+        return withContext(Dispatchers.IO) {
+            try{
+                val response = theMovieDBAPI.getPopularMovies()
+                return@withContext response.body()?.results?.map{ it.toMovie() }
+            }catch(e: Exception){
+                e.printStackTrace()
+                return@withContext null
+            }
+        }
+    }
 }
