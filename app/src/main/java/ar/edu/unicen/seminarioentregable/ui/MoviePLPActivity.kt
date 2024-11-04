@@ -1,11 +1,15 @@
 package ar.edu.unicen.seminarioentregable.ui
 
 import android.content.Intent
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Bundle
+import android.view.OrientationEventListener
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import ar.edu.unicen.seminarioentregable.databinding.ActivityMovieplpBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -26,6 +30,32 @@ class MoviePLPActivity: AppCompatActivity() {
 
         subscribeToUi()
         subscribeToViewModel()
+
+        val linearLayoutManager = LinearLayoutManager(this)
+        val gridLayoutManager = GridLayoutManager(this, 2)
+
+        binding.movieList.layoutManager = linearLayoutManager
+
+        val orientationEventListener = object : OrientationEventListener(this) {
+            override fun onOrientationChanged(orientation: Int) {
+                if (orientation == ORIENTATION_UNKNOWN) {
+                    return
+                }
+                binding.movieList.layoutManager = if(isLandscape(orientation)){
+                    gridLayoutManager
+                }
+                else{
+                    linearLayoutManager
+                }
+            }
+        }
+
+        orientationEventListener.enable()
+    }
+
+    private fun isLandscape(orientation: Int): Boolean {
+        return orientation in (90 - 45)..(90 + 45) ||
+                orientation in (270 - 45)..(270 + 45)
     }
 
     private fun subscribeToUi(){
