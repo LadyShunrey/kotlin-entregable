@@ -1,5 +1,7 @@
 package ar.edu.unicen.seminarioentregable.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unicen.seminarioentregable.ddl.data.TheMovieRepository

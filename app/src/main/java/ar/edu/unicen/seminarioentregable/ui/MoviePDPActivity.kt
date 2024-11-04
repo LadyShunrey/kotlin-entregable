@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import ar.edu.unicen.seminarioentregable.databinding.ActivityMoviepdpBinding
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -44,6 +45,11 @@ class MoviePDPActivity: AppCompatActivity()  {
             viewModel.setMovie(movie)
             binding.movieTitle.text = movie.title
             binding.movieOverview.text = movie.overview
+
+            Glide.with(this)
+                .load("https://image.tmdb.org/t/p/w500" + movie.poster_path)
+                .into(binding.moviePoster)
+
         }else{
             Toast.makeText(this, "Error loading movie", Toast.LENGTH_SHORT).show()
             finish()

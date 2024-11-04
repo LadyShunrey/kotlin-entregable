@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.unicen.seminarioentregable.databinding.ListItemMovieBinding
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
+import com.bumptech.glide.Glide
 
 class MovieAdapter(
     private val popularMovies: List<Movie>,
@@ -33,6 +34,10 @@ class MovieAdapter(
         fun bind(movie: Movie){
             binding.movieTitle.text = movie.title
             binding.movieOverview.text = movie.overview
+
+            Glide.with(itemView.context)
+                .load("https://image.tmdb.org/t/p/w500" + movie.poster_path)
+                .into(binding.moviePoster)
 
             binding.root.setOnClickListener {
                 onMovieClick(movie)
