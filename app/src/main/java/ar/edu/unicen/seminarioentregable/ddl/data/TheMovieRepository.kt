@@ -18,8 +18,8 @@ class TheMovieRepository @Inject constructor(
         return response
     }
 
-    suspend fun getPopularMovies(): List<Movie>? {
-        return theMovieDBRemoteDataSource.getPopularMovies()
+    suspend fun getPopularMovies(page: Int): MovieAPIResponse {
+        return theMovieDBRemoteDataSource.getPopularMovies(page)
     }
 
     suspend fun getMovieDetailsById(

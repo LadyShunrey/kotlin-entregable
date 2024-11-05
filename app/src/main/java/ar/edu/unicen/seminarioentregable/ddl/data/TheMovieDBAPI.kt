@@ -16,6 +16,7 @@ interface TheMovieDBAPI {
 
     @GET("/3/movie/popular")
     suspend fun getPopularMovies(
+        @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = "b71b3f041ea5177c645079a3318d06d"
     ): Response<MovieAPIResponse>
 

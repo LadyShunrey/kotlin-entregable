@@ -33,14 +33,17 @@ class TheMovieDBRemoteDataSource @Inject constructor(
         }
     }
 
-    suspend fun getPopularMovies(): List<Movie>? {
+    suspend fun getPopularMovies(page: Int): MovieAPIResponse {
         return withContext(Dispatchers.IO) {
             try{
-                val response = theMovieDBAPI.getPopularMovies()
-                return@withContext response.body()?.results?.map{ it.toMovie() }
+                val response = theMovieDBAPI.getPopularMovies(page)
+                if(response.isSuccessful){
+                    response.body()!!
+                }else{
+                    throw Exception("API Error: ${response.code()} - ${response.message()}")
+                }
             }catch(e: Exception){
-                e.printStackTrace()
-                return@withContext null
+                throw Exception("Network Error: ${e.message}")
             }
         }
     }

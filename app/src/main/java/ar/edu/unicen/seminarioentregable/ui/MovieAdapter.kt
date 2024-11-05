@@ -2,15 +2,26 @@ package ar.edu.unicen.seminarioentregable.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.unicen.seminarioentregable.databinding.ListItemMovieBinding
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
 import com.bumptech.glide.Glide
 
 class MovieAdapter(
-    private val popularMovies: List<Movie>,
     private val onMovieClick: (Movie) -> Unit
-): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>()  {
+): PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
+
+    companion object {
+        private val MOVIE_COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean =
+                oldItem == newItem
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
@@ -19,12 +30,10 @@ class MovieAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movie = popularMovies[position]
-        holder.bind(movie)
-    }
-
-    override fun getItemCount(): Int {
-        return popularMovies.size
+        val movie = getItem(position)
+        if (movie != null){
+            holder.bind(movie)
+        }
     }
 
     inner class MovieViewHolder(

@@ -14,6 +14,7 @@ import ar.edu.unicen.seminarioentregable.databinding.ActivityMovieplpBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MoviePLPActivity: AppCompatActivity() {
@@ -69,7 +70,7 @@ class MoviePLPActivity: AppCompatActivity() {
     }
 
     private fun subscribeToUi(){
-        viewModel.getPopularMovies()
+        viewModel.getPopularMovies(page = 1)
     }
 
     private fun subscribeToViewModel(){
@@ -81,15 +82,21 @@ class MoviePLPActivity: AppCompatActivity() {
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.popularMovies.onEach { popularMovies ->
-            binding.movieList.adapter = MovieAdapter(
-                popularMovies = popularMovies ?: emptyList(),
+        viewModel.popularMovies.onEach {
+            val movieAdapter = MovieAdapter(
                 onMovieClick = { movie ->
                     val intent = Intent(this, MoviePDPActivity::class.java)
                     intent.putExtra("movie", movie)
                     startActivity(intent)
                 }
             )
+            binding.movieList.adapter = movieAdapter
+
+            lifecycleScope.launch {
+                viewModel.pager.collect { pagingData ->
+                    movieAdapter.submitData(pagingData)
+                }
+            }
         }.launchIn(lifecycleScope)
 
         viewModel.error.onEach { error ->
