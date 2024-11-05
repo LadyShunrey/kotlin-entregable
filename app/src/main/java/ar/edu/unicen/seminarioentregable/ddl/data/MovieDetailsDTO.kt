@@ -4,7 +4,7 @@ import ar.edu.unicen.seminarioentregable.ddl.models.Genre
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
 import com.google.gson.annotations.SerializedName
 
-class MovieDTO(
+class MovieDetailsDTO(
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")
@@ -16,9 +16,10 @@ class MovieDTO(
     @SerializedName("poster_path")
     val poster_path: String?,
     @SerializedName("vote_average")
-    val vote_average: Double?
+    val vote_average: Double?,
+    @SerializedName("genres")
+    val genres: List<Genre>
 ) {
-
     fun toMovie(): Movie {
         return Movie(
             id = id,
@@ -26,7 +27,8 @@ class MovieDTO(
             original_language = original_language,
             overview = overview,
             poster_path = poster_path,
-            vote_average = vote_average
+            vote_average = vote_average,
+            genres = genres
         )
     }
 }

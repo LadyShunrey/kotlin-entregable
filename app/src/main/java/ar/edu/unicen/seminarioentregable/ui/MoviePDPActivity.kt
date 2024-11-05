@@ -50,6 +50,13 @@ class MoviePDPActivity: AppCompatActivity()  {
                 .load("https://image.tmdb.org/t/p/w500" + movie.poster_path)
                 .into(binding.moviePoster)
 
+            binding.movieRating.text = movie.vote_average.toString()
+
+            viewModel.genres.onEach { genres ->
+                val genreNames = genres?.joinToString(", ") { it.name ?: "" }?:""
+                binding.movieGenre.text = genreNames
+            }.launchIn(lifecycleScope)
+
         }else{
             Toast.makeText(this, "Error loading movie", Toast.LENGTH_SHORT).show()
             finish()

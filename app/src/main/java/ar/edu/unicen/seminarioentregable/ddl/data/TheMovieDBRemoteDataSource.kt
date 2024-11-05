@@ -2,6 +2,7 @@ package ar.edu.unicen.seminarioentregable.ddl.data
 
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
 import ar.edu.unicen.seminarioentregable.ddl.models.MovieAPIResponse
+import ar.edu.unicen.seminarioentregable.ddl.models.MovieDetailsAPIResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
@@ -40,6 +41,24 @@ class TheMovieDBRemoteDataSource @Inject constructor(
             }catch(e: Exception){
                 e.printStackTrace()
                 return@withContext null
+            }
+        }
+    }
+
+    suspend fun getMovieDetailsById(
+        movieId: Int
+    ): Response<MovieDetailsAPIResponse>? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = theMovieDBAPI.getMovieDetailsById(movieId)
+                if(response.isSuccessful){
+                    response
+                }else{
+                    null
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
             }
         }
     }
