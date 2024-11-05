@@ -34,6 +34,16 @@ class MoviePLPActivity: AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         val gridLayoutManager = GridLayoutManager(this, 2)
 
+        viewModel.loading.onEach { loading ->
+            if(loading){
+                binding.progressBar.visibility = android.view.View.VISIBLE
+                binding.movieList.visibility = android.view.View.INVISIBLE
+            }else{
+                binding.progressBar.visibility = android.view.View.INVISIBLE
+                binding.movieList.visibility = android.view.View.VISIBLE
+            }
+        }
+
         binding.movieList.layoutManager = linearLayoutManager
 
         val orientationEventListener = object : OrientationEventListener(this) {
@@ -59,9 +69,7 @@ class MoviePLPActivity: AppCompatActivity() {
     }
 
     private fun subscribeToUi(){
-        binding.showPopularMoviesButton.setOnClickListener {
-            viewModel.getPopularMovies()
-        }
+        viewModel.getPopularMovies()
     }
 
     private fun subscribeToViewModel(){
@@ -71,7 +79,6 @@ class MoviePLPActivity: AppCompatActivity() {
             }else{
                 binding.progressBar.visibility = android.view.View.INVISIBLE
             }
-            binding.showPopularMoviesButton.isEnabled = !loading
         }.launchIn(lifecycleScope)
 
         viewModel.popularMovies.onEach { popularMovies ->
@@ -85,8 +92,6 @@ class MoviePLPActivity: AppCompatActivity() {
             )
         }.launchIn(lifecycleScope)
 
-        //val intent = Intent(this, MoviePLPActivity::class.java)
-        //            startActivity(intent)
         viewModel.error.onEach { error ->
             if(error){
                 binding.error.visibility = android.view.View.VISIBLE

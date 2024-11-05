@@ -8,6 +8,7 @@ import ar.edu.unicen.seminarioentregable.ddl.data.TheMovieRepository
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
 import ar.edu.unicen.seminarioentregable.ddl.models.MovieAPIResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -32,6 +33,7 @@ class MoviePLPViewModel @Inject constructor(
             _error.value = false
             _popularMovies.value = null
 
+            delay(2000)
             val popularMovies = theMovieRepository.getPopularMovies()
 
             _loading.value = false

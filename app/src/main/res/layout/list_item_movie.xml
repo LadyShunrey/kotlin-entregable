@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/movie_poster"
-        android:layout_width="60.dp"
-        android:layout_height="60.dp"
+        android:layout_width="70.dp"
+        android:layout_height="90.dp"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/movie_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12.dp"
         android:textStyle="bold"
@@ -26,6 +26,7 @@
         android:textAlignment="textStart"
         tools:text="Movie TITLE"
         android:layout_marginStart="16.dp"
+        app:layout_constraintWidth_percent="0.7"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/movie_poster"
@@ -33,12 +34,13 @@
 
     <TextView
         android:id="@+id/movie_overview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="14.sp"
         tools:text="Movie overview"
         android:layout_marginBottom="12.dp"
+        app:layout_constraintWidth_percent="0.7"
         app:layout_constraintTop_toBottomOf="@id/movie_title"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@+id/movie_title"

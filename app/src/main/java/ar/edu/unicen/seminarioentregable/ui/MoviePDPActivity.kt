@@ -27,8 +27,18 @@ class MoviePDPActivity: AppCompatActivity()  {
         viewModel.loading.onEach { loading ->
             if(loading){
                 binding.progressBar.visibility = android.view.View.VISIBLE
+                binding.movieTitle.visibility = android.view.View.INVISIBLE
+                binding.movieOverview.visibility = android.view.View.INVISIBLE
+                binding.moviePoster.visibility = android.view.View.INVISIBLE
+                binding.movieRating.visibility = android.view.View.INVISIBLE
+                binding.movieGenre.visibility = android.view.View.INVISIBLE
             }else{
                 binding.progressBar.visibility = android.view.View.INVISIBLE
+                binding.movieTitle.visibility = android.view.View.VISIBLE
+                binding.movieOverview.visibility = android.view.View.VISIBLE
+                binding.moviePoster.visibility = android.view.View.VISIBLE
+                binding.movieRating.visibility = android.view.View.VISIBLE
+                binding.movieGenre.visibility = android.view.View.VISIBLE
             }
         }.launchIn(lifecycleScope)
 

@@ -36,7 +36,7 @@ class MoviePDPViewModel @Inject constructor(
             _error.value = false
             _movie.value = null
 
-            delay(1000)
+            delay(2000)
 
             _loading.value = false
             _movie.value = movie
