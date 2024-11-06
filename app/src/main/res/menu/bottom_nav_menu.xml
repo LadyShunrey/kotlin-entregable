@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_fragment"
+        android:icon="@drawable/ic_home"
+        android:contentDescription="@string/home"/>
+
+    <item
+        android:id="@+id/popular_movies_fragment"
+        android:icon="@drawable/ic_popular_movies"
+        android:contentDescription="@string/popular_movies"/>
+
+    <item
+        android:id="@+id/wishlist_fragment"
+        android:icon="@drawable/ic_wishlist"
+        android:contentDescription="@string/wishlist"/>
+
+</menu>

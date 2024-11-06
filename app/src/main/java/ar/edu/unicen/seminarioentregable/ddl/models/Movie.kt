@@ -13,5 +13,12 @@ data class Movie (
     val vote_average: Double?,
     val genres: List<Genre>? = null
 ): Parcelable {
-
+    fun toWishlistMovie(): WishlistMovie {
+        return WishlistMovie(
+            id = id ?: 0,
+            title = title ?: "",
+            overview = overview,
+            posterPath = poster_path
+        )
+    }
 }

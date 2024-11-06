@@ -41,26 +41,31 @@ class MainViewModel @Inject constructor(
             _error.value = false
             _movie.value = null
 
-            val response: Response<MovieAPIResponse> = theMovieRepository.getMovie(title)
+            try{
+                val response: Response<MovieAPIResponse> = theMovieRepository.getMovie(title)
 
-            if(response.isSuccessful && response.body() != null){
-                val movieApiResponse = response.body()!!
-                val moviesDTO = movieApiResponse.results
-                val movies = moviesDTO.map { it.toMovie() }
-                _movie.value = movies.firstOrNull()
+                if(response.isSuccessful && response.body() != null){
+                    val movieApiResponse = response.body()!!
+                    val moviesDTO = movieApiResponse.results
+                    val movies = moviesDTO.map { it.toMovie() }
+                    _movie.value = movies.firstOrNull()
 
-                val posterPath = _movie.value?.poster_path
-                if(posterPath != null){
-                    _posterUrl.value = "https://image.tmdb.org/t/p/w500$posterPath"
+                    val posterPath = _movie.value?.poster_path
+                    if(posterPath != null){
+                        _posterUrl.value = "https://image.tmdb.org/t/p/w500$posterPath"
+                    }else{
+                        null
+                    }
+
                 }else{
-                    null
+                    _error.value = true
                 }
-
-            }else{
+            }catch (e: Exception){
                 _error.value = true
+            }finally{
+                delay(2000)
+                _loading.value = false
             }
-            delay(2000)
-            _loading.value = false
         }
     }
 }

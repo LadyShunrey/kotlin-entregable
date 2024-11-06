@@ -3,11 +3,14 @@ package ar.edu.unicen.seminarioentregable.ddl.data
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
 import ar.edu.unicen.seminarioentregable.ddl.models.MovieAPIResponse
 import ar.edu.unicen.seminarioentregable.ddl.models.MovieDetailsAPIResponse
+import ar.edu.unicen.seminarioentregable.ddl.models.WishlistMovie
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
 
 class TheMovieRepository @Inject constructor(
-    private val theMovieDBRemoteDataSource: TheMovieDBRemoteDataSource
+    private val theMovieDBRemoteDataSource: TheMovieDBRemoteDataSource,
+    private val wishlistDataSource: WishlistDataSource
 ){
     suspend fun getMovie(
         title: String
@@ -29,4 +32,15 @@ class TheMovieRepository @Inject constructor(
         return response
     }
 
+    suspend fun addToWishlist(movie: Movie) {
+        wishlistDataSource.addToWishlist(movie)
+    }
+
+    suspend fun removeFromWishlist(movieId: Int) {
+        wishlistDataSource.removeFromWishlist(movieId)
+    }
+
+    fun getWishlistMovies(): Flow<List<WishlistMovie>> {
+        return wishlistDataSource.getWishlistMovies()
+    }
 }

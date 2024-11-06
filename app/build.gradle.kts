@@ -42,6 +42,22 @@ android {
         buildConfig = true
         dataBinding = true
     }
+
+    kapt {
+        correctErrorTypes = true
+        useBuildCache = false
+    }
+
+    kotlin {
+        sourceSets {
+            debug {
+                kotlin.srcDir("build/generated/source/kaptKotlin/debug")
+            }
+            release {
+                kotlin.srcDir("build/generated/source/kaptKotlin/release")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -63,6 +79,10 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     implementation("androidx.paging:paging-runtime:3.3.2")
+
+    implementation("androidx.room:room-runtime:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
 
 
     testImplementation(libs.junit)

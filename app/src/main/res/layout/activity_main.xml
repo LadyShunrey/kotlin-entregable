@@ -9,95 +9,17 @@
         <import type="ar.edu.unicen.seminarioentregable.utils.BindingAdapters" />
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.MainActivity">
-
-            <TextView
-                android:id="@+id/welcome_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20.dp"
-                android:text="Welcome to The Movie Database"
-                android:textStyle="bold"
-                android:textSize="30.sp"
-                android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/go_to_popular_movies_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60.dp"
-                android:text="Go to popular movies"
-                android:textStyle="bold"
-                android:textSize="24.sp"
-                android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/welcome_text"/>
-
-            <Button
-                android:id="@+id/popular_movies_button"
-                android:layout_width="150.dp"
-                android:layout_height="wrap_content"
-                android:text="Popular movies"
-                android:layout_marginTop="20.dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/go_to_popular_movies_text"/>
-
-            <TextView
-                android:id="@+id/search_movie_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50.dp"
-                android:text="Search for a movie"
-                android:textStyle="bold"
-                android:textSize="24.sp"
-                android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/popular_movies_button"/>
-
-            <EditText
-                android:id="@+id/search_movie_edit_text"
-                android:layout_width="200.dp"
-                android:layout_height="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="20.dp"
-                android:hint="Enter a movie name"
-                android:inputType="text"
-                app:layout_constraintTop_toBottomOf="@id/search_movie_text"/>
-
-            <Button
-                android:id="@+id/search_movie_button"
-                android:layout_width="150.dp"
-                android:layout_height="wrap_content"
-                android:text="Search"
-                android:layout_marginTop="12.dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_movie_edit_text"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/movie_list"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/error"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_movie_button" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:id="@+id/movie_information"
@@ -111,6 +33,86 @@
                 app:layout_constraintTop_toBottomOf="@id/search_movie_button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/welcome_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20.dp"
+                    android:text="Welcome to The Movie Database"
+                    android:textStyle="bold"
+                    android:textSize="30.sp"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/go_to_popular_movies_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60.dp"
+                    android:text="Go to popular movies"
+                    android:textStyle="bold"
+                    android:textSize="24.sp"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/welcome_text"/>
+
+                <Button
+                    android:id="@+id/popular_movies_button"
+                    android:layout_width="150.dp"
+                    android:layout_height="wrap_content"
+                    android:text="Popular movies"
+                    android:layout_marginTop="20.dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/go_to_popular_movies_text"/>
+
+                <TextView
+                    android:id="@+id/search_movie_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50.dp"
+                    android:text="Search for a movie"
+                    android:textStyle="bold"
+                    android:textSize="24.sp"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/popular_movies_button"/>
+
+                <EditText
+                    android:id="@+id/search_movie_edit_text"
+                    android:layout_width="200.dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="20.dp"
+                    android:hint="Enter a movie name"
+                    android:inputType="text"
+                    app:layout_constraintTop_toBottomOf="@id/search_movie_text"/>
+
+                <Button
+                    android:id="@+id/search_movie_button"
+                    android:layout_width="150.dp"
+                    android:layout_height="wrap_content"
+                    android:text="Search"
+                    android:layout_marginTop="12.dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/search_movie_edit_text"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/movie_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/error"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/search_movie_button" />
 
                 <TextView
                     android:id="@+id/movie_title"
@@ -144,32 +146,53 @@
                     android:layout_marginTop="12.dp"
                     app:imageUrl="@{viewModel.posterUrl}"/>
 
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48.dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/search_movie_button"/>
+
+                <TextView
+                    android:id="@+id/error"
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.dp"
+                    android:textStyle="bold"
+                    android:textSize="18.sp"
+                    android:textAlignment="center"
+                    android:text="An error occcurred, try again"
+                    android:layout_marginBottom="24.dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
             </LinearLayout>
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48.dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_movie_button"/>
 
+        </ScrollView>
 
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                android:id="@+id/error"
-                android:visibility="invisible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12.dp"
-                android:textStyle="bold"
-                android:textSize="18.sp"
-                android:textAlignment="center"
-                android:text="An error occcurred, try again"
-                android:layout_marginBottom="24.dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_nav_menu"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
