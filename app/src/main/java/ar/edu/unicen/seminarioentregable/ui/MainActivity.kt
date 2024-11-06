@@ -137,6 +137,16 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
+                R.id.trending_movies_fragment -> {
+
+                    binding.movieInformation.visibility = android.view.View.GONE
+                    binding.fragmentContainer.visibility = android.view.View.VISIBLE
+
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, TrendingMoviesFragment())
+                        .commit()
+                    true
+                }
                 else -> false
             }
         }

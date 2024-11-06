@@ -48,6 +48,21 @@ class TheMovieDBRemoteDataSource @Inject constructor(
         }
     }
 
+    suspend fun getTrendingMovies(): MovieAPIResponse {
+        return withContext(Dispatchers.IO) {
+            try{
+                val response = theMovieDBAPI.getTrendingMovies()
+                if(response.isSuccessful){
+                    response.body()!!
+                }else{
+                    throw Exception("API Error: ${response.code()} - ${response.message()}")
+                }
+            }catch(e: Exception){
+                throw Exception("Network Error: ${e.message}")
+            }
+        }
+    }
+
     suspend fun getMovieDetailsById(
         movieId: Int
     ): Response<MovieDetailsAPIResponse>? {

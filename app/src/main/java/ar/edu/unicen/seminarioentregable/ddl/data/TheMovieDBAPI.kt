@@ -26,8 +26,8 @@ interface TheMovieDBAPI {
         @Query("api_key") apiKey: String = "b71b3f041ea5177c645079a3318d06d"
     ): Response<MovieDetailsAPIResponse>
 
-    @GET("/3/genre/movie/list")
-    suspend fun getGenres(
+    @GET("/3/trending/movie/week")
+    suspend fun getTrendingMovies(
         @Query("api_key") apiKey: String = "b71b3f041ea5177c645079a3318d06d"
     ): Response<MovieAPIResponse>
 }

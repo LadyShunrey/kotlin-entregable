@@ -36,8 +36,12 @@ class MainViewModel @Inject constructor(
     private val _popularMovies = MutableStateFlow<MovieAPIResponse?>(MovieAPIResponse(0, emptyList(),0,0))
     val popularMovies = _popularMovies.asStateFlow()
 
+    private val _trendingMovies = MutableStateFlow<MovieAPIResponse?>(MovieAPIResponse(0, emptyList(),0,0))
+    val trendingMovies = _trendingMovies.asStateFlow()
+
     init {
         getPopularMovies(1)
+        getTrendingMovies()
     }
 
     fun getMovie(
@@ -87,6 +91,21 @@ class MainViewModel @Inject constructor(
             _loading.value = false
             _popularMovies.emit(popularMovies)
             _error.value = popularMovies == null
+        }
+    }
+
+    fun getTrendingMovies(){
+        viewModelScope.launch {
+            _loading.value = true
+            _error.value = false
+            _trendingMovies.value = null
+
+            delay(2000)
+            val trendingMovies = theMovieRepository.getTrendingMovies()
+
+            _loading.value = false
+            _trendingMovies.value = trendingMovies
+            _error.value = trendingMovies == null
         }
     }
 }

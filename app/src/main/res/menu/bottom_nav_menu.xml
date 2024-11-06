@@ -14,6 +14,12 @@
         android:contentDescription="@string/popular_movies"/>
 
     <item
+        android:id="@+id/trending_movies_fragment"
+        android:title="Trending"
+        android:icon="@drawable/ic_trending_movies"
+        android:contentDescription="Trending"/>
+
+    <item
         android:id="@+id/wishlist_fragment"
         android:icon="@drawable/ic_wishlist"
         android:title="@string/wishlist"

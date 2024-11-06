@@ -25,6 +25,10 @@ class TheMovieRepository @Inject constructor(
         return theMovieDBRemoteDataSource.getPopularMovies(page)
     }
 
+    suspend fun getTrendingMovies(): MovieAPIResponse {
+        return theMovieDBRemoteDataSource.getTrendingMovies()
+    }
+
     suspend fun getMovieDetailsById(
         movieId: Int
     ): Response<MovieDetailsAPIResponse>? {
