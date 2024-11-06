@@ -3,17 +3,20 @@
 
     <item
         android:id="@+id/home_fragment"
+        android:title="@string/home"
         android:icon="@drawable/ic_home"
         android:contentDescription="@string/home"/>
 
     <item
         android:id="@+id/popular_movies_fragment"
+        android:title="@string/popular_movies"
         android:icon="@drawable/ic_popular_movies"
         android:contentDescription="@string/popular_movies"/>
 
     <item
         android:id="@+id/wishlist_fragment"
         android:icon="@drawable/ic_wishlist"
+        android:title="@string/wishlist"
         android:contentDescription="@string/wishlist"/>
 
 </menu>
