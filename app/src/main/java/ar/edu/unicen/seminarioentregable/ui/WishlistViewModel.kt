@@ -7,8 +7,10 @@ import ar.edu.unicen.seminarioentregable.ddl.data.TheMovieRepository
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
 import ar.edu.unicen.seminarioentregable.ddl.models.WishlistMovie
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject

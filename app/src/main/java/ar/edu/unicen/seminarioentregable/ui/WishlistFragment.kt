@@ -13,7 +13,9 @@ import ar.edu.unicen.seminarioentregable.R
 import ar.edu.unicen.seminarioentregable.databinding.FragmentWishlistBinding
 import ar.edu.unicen.seminarioentregable.ddl.models.WishlistMovie
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -22,7 +24,6 @@ class WishlistFragment: Fragment() {
     private val viewModel: WishlistViewModel by viewModels()
     private var _binding: FragmentWishlistBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +36,9 @@ class WishlistFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.progressBar.visibility = View.VISIBLE
+        binding.movieList.visibility = View.INVISIBLE
 
         val movieAdapter = WishlistMovieAdapter(
             onMovieClick = { movie ->
@@ -49,6 +53,9 @@ class WishlistFragment: Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.wishlistMovies.collectLatest { wishlistMovies ->
                 movieAdapter.submitList(wishlistMovies)
+                delay(2000)
+                binding.progressBar.visibility = View.INVISIBLE
+                binding.movieList.visibility = View.VISIBLE
             }
         }
     }

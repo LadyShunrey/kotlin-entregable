@@ -77,8 +77,10 @@ class MoviePLPActivity: AppCompatActivity() {
         viewModel.loading.onEach { loading ->
             if(loading){
                 binding.progressBar.visibility = android.view.View.VISIBLE
+                binding.movieList.visibility = android.view.View.INVISIBLE
             }else{
                 binding.progressBar.visibility = android.view.View.INVISIBLE
+                binding.movieList.visibility = android.view.View.VISIBLE
             }
         }.launchIn(lifecycleScope)
 
