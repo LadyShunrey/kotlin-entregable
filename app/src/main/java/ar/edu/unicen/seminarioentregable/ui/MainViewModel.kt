@@ -33,6 +33,13 @@ class MainViewModel @Inject constructor(
     private val _posterUrl = MutableLiveData<String?>(null)
     val posterUrl: LiveData<String?> = _posterUrl
 
+    private val _popularMovies = MutableStateFlow<MovieAPIResponse?>(MovieAPIResponse(0, emptyList(),0,0))
+    val popularMovies = _popularMovies.asStateFlow()
+
+    init {
+        getPopularMovies(1)
+    }
+
     fun getMovie(
         title: String
     ){
@@ -66,6 +73,20 @@ class MainViewModel @Inject constructor(
                 delay(2000)
                 _loading.value = false
             }
+        }
+    }
+
+    fun getPopularMovies(page: Int){
+        viewModelScope.launch {
+            _loading.value = true
+            _error.value = false
+
+            delay(2000)
+            val popularMovies = theMovieRepository.getPopularMovies(page)
+
+            _loading.value = false
+            _popularMovies.emit(popularMovies)
+            _error.value = popularMovies == null
         }
     }
 }
