@@ -59,4 +59,12 @@ class MoviePDPViewModel @Inject constructor(
 
         }
     }
+
+    fun addToWishlist(movie: Movie?){
+        viewModelScope.launch {
+            if(movie != null){
+                theMovieRepository.addToWishlist(movie)
+            }
+        }
+    }
 }

@@ -34,4 +34,5 @@ class WishlistViewModel @Inject constructor(
             theMovieRepository.removeFromWishlist(movieId)
         }
     }
+
 }

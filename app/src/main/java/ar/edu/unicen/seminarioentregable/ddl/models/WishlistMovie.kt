@@ -9,6 +9,6 @@ data class WishlistMovie(
     val id: Int,
     val title: String,
     val overview: String?,
-    val posterPath: String?
+    val poster_path: String?
 ){
 }

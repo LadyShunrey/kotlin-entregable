@@ -84,6 +84,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
 
+    implementation("androidx.fragment:fragment-ktx:1.5.7")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

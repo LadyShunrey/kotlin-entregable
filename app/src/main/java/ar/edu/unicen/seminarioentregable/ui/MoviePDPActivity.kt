@@ -71,5 +71,10 @@ class MoviePDPActivity: AppCompatActivity()  {
             Toast.makeText(this, "Error loading movie", Toast.LENGTH_SHORT).show()
             finish()
         }
+
+        binding.addToWishlistButton.setOnClickListener {
+            viewModel.addToWishlist(movie)
+        }
+
     }
 }
