@@ -45,10 +45,13 @@ class WishlistFragment: Fragment() {
                 val intent = Intent(requireContext(), MoviePDPActivity::class.java)
                 intent.putExtra("movie", movie.id)
                 startActivity(intent)
-            }
+            },
+            viewModel = viewModel
         )
         binding.movieList.adapter = movieAdapter
         binding.movieList.layoutManager = LinearLayoutManager(requireContext())
+
+        movieAdapter.showRemoveButton = true
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.wishlistMovies.collectLatest { wishlistMovies ->
@@ -58,6 +61,7 @@ class WishlistFragment: Fragment() {
                 binding.movieList.visibility = View.VISIBLE
             }
         }
+
     }
 
     override fun onDestroyView() {

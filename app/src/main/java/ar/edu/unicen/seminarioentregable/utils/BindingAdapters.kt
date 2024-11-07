@@ -1,5 +1,6 @@
 package ar.edu.unicen.seminarioentregable.utils
 
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import ar.edu.unicen.seminarioentregable.R
@@ -16,5 +17,11 @@ object BindingAdapters {
                 .error(R.drawable.error_image)
                 .into(view)
         }
+    }
+
+    @BindingAdapter("showRemoveButton")
+    @JvmStatic
+    fun setShowRemoveButton(view: View, showRemoveButton: Boolean) {
+        view.visibility = if (showRemoveButton) View.VISIBLE else View.GONE
     }
 }

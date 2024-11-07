@@ -1,6 +1,7 @@
 package ar.edu.unicen.seminarioentregable.ui
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -12,8 +13,11 @@ import ar.edu.unicen.seminarioentregable.ddl.models.WishlistMovie
 import com.bumptech.glide.Glide
 
 class WishlistMovieAdapter(
-    private val onMovieClick: (WishlistMovie) -> Unit
+    private val onMovieClick: (WishlistMovie) -> Unit,
+    private val viewModel: WishlistViewModel
 ): ListAdapter<WishlistMovie, WishlistMovieAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
+
+    var showRemoveButton = false
 
     companion object {
         private val MOVIE_COMPARATOR = object : DiffUtil.ItemCallback<WishlistMovie>() {
@@ -34,7 +38,7 @@ class WishlistMovieAdapter(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
         if (movie != null){
-            holder.bind(movie)
+            holder.bind(movie, viewModel, showRemoveButton)
         }
     }
 
@@ -42,7 +46,7 @@ class WishlistMovieAdapter(
         private val binding: ListItemMovieBinding
     ): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(wishlistMovie: WishlistMovie){
+        fun bind(wishlistMovie: WishlistMovie, viewModel: WishlistViewModel, showRemoveButton: Boolean){
             binding.movieTitle.text = wishlistMovie.title
             binding.movieOverview.text = wishlistMovie.overview
 
@@ -52,6 +56,12 @@ class WishlistMovieAdapter(
 
             binding.root.setOnClickListener {
                 onMovieClick(wishlistMovie)
+            }
+
+            binding.showRemoveButton = showRemoveButton
+
+            binding.removeButton.setOnClickListener {
+                viewModel.removeFromWishlist(wishlistMovie.id)
             }
 
         }
