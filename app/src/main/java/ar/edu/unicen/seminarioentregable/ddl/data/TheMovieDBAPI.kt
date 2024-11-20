@@ -30,4 +30,10 @@ interface TheMovieDBAPI {
     suspend fun getTrendingMovies(
         @Query("api_key") apiKey: String = "b71b3f041ea5177c645079a3318d06d"
     ): Response<MovieAPIResponse>
+
+    @GET("/3/movie/{movie_id}/similar")
+    suspend fun getSimilarMovies(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String = "b71b3f041ea5177c645079a3318d06d"
+    ): Response<MovieAPIResponse>
 }

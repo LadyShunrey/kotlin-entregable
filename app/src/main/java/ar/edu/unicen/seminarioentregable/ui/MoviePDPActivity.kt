@@ -1,10 +1,13 @@
 package ar.edu.unicen.seminarioentregable.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import ar.edu.unicen.seminarioentregable.databinding.ActivityMoviepdpBinding
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
 import com.bumptech.glide.Glide
@@ -17,6 +20,12 @@ class MoviePDPActivity: AppCompatActivity()  {
     private lateinit var binding: ActivityMoviepdpBinding
 
     private val viewModel by viewModels<MoviePDPViewModel>()
+
+    private val movieAdapter = PopularMoviesAdapter { movie ->
+        val intent = Intent(this, MoviePDPActivity::class.java)
+        intent.putExtra("movie", movie)
+        startActivity(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,5 +92,15 @@ class MoviePDPActivity: AppCompatActivity()  {
             binding.addToWishlistButton.isEnabled = false
         }
 
+
+        binding.similarMoviesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.similarMoviesList.adapter = movieAdapter
+
+        viewModel.similarMovies.onEach { similarMovies ->
+            similarMovies?.let{
+                val movies = it.results.map { movieDTO -> movieDTO.toMovie() }
+                movieAdapter.submitList(movies)
+            }
+        }.launchIn(lifecycleScope)
     }
 }

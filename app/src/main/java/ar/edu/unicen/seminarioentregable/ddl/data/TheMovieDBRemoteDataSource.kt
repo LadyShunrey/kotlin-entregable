@@ -80,4 +80,21 @@ class TheMovieDBRemoteDataSource @Inject constructor(
             }
         }
     }
+
+    suspend fun getSimilarMovies(
+        movieId: Int
+    ): MovieAPIResponse {
+        return withContext(Dispatchers.IO) {
+            try{
+                val response = theMovieDBAPI.getSimilarMovies(movieId)
+                if(response.isSuccessful){
+                    response.body()!!
+                }else{
+                    throw Exception("API Error: ${response.code()} - ${response.message()}")
+                }
+            }catch(e: Exception){
+                throw Exception("Network Error: ${e.message}")
+            }
+        }
+    }
 }

@@ -47,4 +47,9 @@ class TheMovieRepository @Inject constructor(
     fun getWishlistMovies(): Flow<List<WishlistMovie>> {
         return wishlistDataSource.getWishlistMovies()
     }
+
+    suspend fun getSimilarMovies(movieId: Int): MovieAPIResponse {
+        return theMovieDBRemoteDataSource.getSimilarMovies(movieId)
+    }
+
 }

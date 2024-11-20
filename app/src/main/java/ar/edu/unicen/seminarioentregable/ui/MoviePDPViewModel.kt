@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import ar.edu.unicen.seminarioentregable.ddl.data.TheMovieRepository
 import ar.edu.unicen.seminarioentregable.ddl.models.Genre
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie
+import ar.edu.unicen.seminarioentregable.ddl.models.MovieAPIResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,6 +31,9 @@ class MoviePDPViewModel @Inject constructor(
     private val _genres = MutableStateFlow<List<Genre>?>(null)
     val genres = _genres.asStateFlow()
 
+    private val _similarMovies = MutableStateFlow<MovieAPIResponse?>(null)
+    val similarMovies = _similarMovies.asStateFlow()
+
     fun setMovie(movie: Movie){
         viewModelScope.launch {
             _loading.value = true
@@ -44,6 +48,8 @@ class MoviePDPViewModel @Inject constructor(
             getMovieGenres(movie.id!!)
 
             _error.value = movie == null
+
+            getSimilarMovies(movie.id!!)
         }
 
     }
@@ -65,6 +71,13 @@ class MoviePDPViewModel @Inject constructor(
             if(movie != null){
                 theMovieRepository.addToWishlist(movie)
             }
+        }
+    }
+
+    fun getSimilarMovies(movieId: Int){
+        viewModelScope.launch {
+            val similarMovies = theMovieRepository.getSimilarMovies(movieId)
+            _similarMovies.value = similarMovies
         }
     }
 }
