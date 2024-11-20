@@ -3,6 +3,7 @@ package ar.edu.unicen.seminarioentregable.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class MoviePDPActivity: AppCompatActivity()  {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMoviepdpBinding.inflate(layoutInflater)
+        binding.viewModel = viewModel
         setContentView(binding.root)
 
         viewModel.loading.onEach { loading ->
@@ -104,6 +106,10 @@ class MoviePDPActivity: AppCompatActivity()  {
             }
         }.launchIn(lifecycleScope)
 
+        viewModel.noSimilarMoviesVisible.observe(this) { isVisible ->
+            binding.noSimilarMoviesText.visibility = if (isVisible) View.VISIBLE else View.GONE
+        }
+
         viewModel.shareMovieEvent.observe(this) { event ->
             event.getContentIfNotHandled()?.let { movie ->
                 val shareIntent = Intent(Intent.ACTION_SEND)
@@ -127,7 +133,6 @@ class MoviePDPActivity: AppCompatActivity()  {
         binding.homepageButton.setOnClickListener {
             viewModel.openHomepage()
         }
-
 
     }
 

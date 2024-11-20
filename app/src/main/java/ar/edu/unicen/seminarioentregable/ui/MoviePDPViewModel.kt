@@ -36,6 +36,9 @@ class MoviePDPViewModel @Inject constructor(
     private val _similarMovies = MutableStateFlow<MovieAPIResponse?>(null)
     val similarMovies = _similarMovies.asStateFlow()
 
+    private val _noSimilarMoviesVisible = MutableLiveData<Boolean>(false)
+    val noSimilarMoviesVisible: LiveData<Boolean> = _noSimilarMoviesVisible
+
     private val _homepage = MutableStateFlow<String?>(null)
     val homepage = _homepage.asStateFlow()
 
@@ -56,11 +59,16 @@ class MoviePDPViewModel @Inject constructor(
             _loading.value = false
             _movie.value = movie
 
+            try{
+                getSimilarMovies(movie.id!!)
+            }catch (e: Exception){
+                println("Error al obtener peliculas similares: ${e.message}")
+            }
+
+
             getMovieGenres(movie.id!!)
 
             _error.value = movie == null
-
-            getSimilarMovies(movie.id!!)
 
             getMovieHomepage(movie.id!!)
         }
@@ -90,7 +98,13 @@ class MoviePDPViewModel @Inject constructor(
     fun getSimilarMovies(movieId: Int){
         viewModelScope.launch {
             val similarMovies = theMovieRepository.getSimilarMovies(movieId)
-            _similarMovies.value = similarMovies
+            if(similarMovies.results.isEmpty()){
+                _noSimilarMoviesVisible.value = true
+            }else{
+                _noSimilarMoviesVisible.value = false
+                _similarMovies.value = similarMovies
+            }
+
         }
     }
 

@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import ar.edu.unicen.seminarioentregable.R
 import ar.edu.unicen.seminarioentregable.databinding.ActivityMainBinding
 import com.bumptech.glide.Glide
@@ -24,6 +25,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val viewModel by viewModels<MainViewModel>()
+
+    private val movieAdapter = PopularMoviesAdapter { movie ->
+        val intent = Intent(this, MoviePDPActivity::class.java)
+        intent.putExtra("movie", movie)
+        startActivity(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,11 +59,39 @@ class MainActivity : AppCompatActivity() {
             }
         }.launchIn(lifecycleScope)
 
+        val movieRecyclerView = binding.movieList
+        movieRecyclerView.adapter = movieAdapter
+        movieRecyclerView.layoutManager = LinearLayoutManager(this)
+
         viewModel.movie.onEach { movie ->
             binding.movieTitle.text = movie?.title.orEmpty()
             binding.movieLanguage.text = movie?.original_language.orEmpty()
             binding.movieOverview.text = movie?.overview.orEmpty()
+
+            if(movie != null){
+                movieAdapter.submitList(listOf(movie))
+            }else{
+                movieAdapter.submitList(emptyList())
+            }
         }.launchIn(lifecycleScope)
+
+        binding.movieTitle.setOnClickListener {
+            val movie = viewModel.movie.value
+            if (movie != null) {
+                val intent = Intent(this, MoviePDPActivity::class.java)
+                intent.putExtra("movie", viewModel.movie.value)
+                startActivity(intent)
+            }
+        }
+
+        binding.movieOverview.setOnClickListener {
+            val movie = viewModel.movie.value
+            if (movie != null) {
+                val intent = Intent(this, MoviePDPActivity::class.java)
+                intent.putExtra("movie", viewModel.movie.value)
+                startActivity(intent)
+            }
+        }
 
         viewModel.error.onEach { error ->
             if(error){

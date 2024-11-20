@@ -5,8 +5,9 @@
     <data>
         <variable
             name="viewModel"
-            type="ar.edu.unicen.seminarioentregable.ui.MainViewModel" />
+            type="ar.edu.unicen.seminarioentregable.ui.MoviePDPViewModel" />
         <import type="ar.edu.unicen.seminarioentregable.utils.BindingAdapters" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -165,11 +166,17 @@
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginTop="10dp" />
+                <TextView
+                    android:id="@+id/no_similar_movies_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No hay películas similares"
+                    android:visibility="@{viewModel.noSimilarMoviesVisible ? View.VISIBLE : View.GONE}"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/similar_movies_list"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="400dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="100dp"/>
 
