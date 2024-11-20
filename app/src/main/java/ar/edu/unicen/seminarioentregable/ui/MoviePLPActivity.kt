@@ -12,6 +12,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ar.edu.unicen.seminarioentregable.R
+import ar.edu.unicen.seminarioentregable.app.SeminarioEntregableApp
 import ar.edu.unicen.seminarioentregable.databinding.ActivityMovieplpBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -87,11 +88,16 @@ class MoviePLPActivity: AppCompatActivity() {
         }.launchIn(lifecycleScope)
 
         viewModel.popularMovies.onEach {
+            val application = applicationContext as SeminarioEntregableApp
             val movieAdapter = MovieAdapter(
                 onMovieClick = { movie ->
-                    val intent = Intent(this, MoviePDPActivity::class.java)
-                    intent.putExtra("movie", movie)
-                    startActivity(intent)
+                    if(application.isNetworkAvailable()){
+                        val intent = Intent(this, MoviePDPActivity::class.java)
+                        intent.putExtra("movie", movie)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show()
+                    }
                 }
             )
             binding.movieList.adapter = movieAdapter
