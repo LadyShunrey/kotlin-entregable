@@ -96,7 +96,7 @@ class MoviePLPActivity: AppCompatActivity() {
                         intent.putExtra("movie", movie)
                         startActivity(intent)
                     }else{
-                        Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
                     }
                 }
             )

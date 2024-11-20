@@ -13,6 +13,8 @@
 
     <string name="error_message">Ocurrió un error, intente nuevamente</string>
     <string name="error_no_results_found">No hay resultados para la búsqueda</string>
+    <string name="no_internet_connection">No hay conexión a internet</string>
+    <string name="no_similar_movies">No hay películas similares</string>
 
     <string name="home">Inicio</string>
     <string name="popular_movies">Populares</string>
@@ -20,6 +22,13 @@
     <string name="wishlist">Favoritos</string>
 
     <string name="add_to_wishlist">Agregar a favoritos</string>
+    <string name="remove_from_wishlist">Quitar de favoritos</string>
     <string name="movie_added_to_wishlist">Película agregada a favoritos</string>
+    <string name="similar_movies">Películas similares que te pueden gustar</string>
+    <string name="share">Compartir</string>
+    <string name="homepage">Página web de la película</string>
 
+    <string name="popular_movies_title">Estas son las películas más populares</string>
+    <string name="trending_movies_title">Estas son las películas con más tendencia esta semana</string>
+    <string name="wishlist_title">Estas son tus películas favoritas</string>
 </resources>

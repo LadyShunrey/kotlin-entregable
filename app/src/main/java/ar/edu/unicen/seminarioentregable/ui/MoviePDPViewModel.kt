@@ -1,10 +1,12 @@
 package ar.edu.unicen.seminarioentregable.ui
 
+import androidx.core.content.ContextCompat.getString
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.Observer
+import ar.edu.unicen.seminarioentregable.R
 import ar.edu.unicen.seminarioentregable.ddl.data.TheMovieRepository
 import ar.edu.unicen.seminarioentregable.ddl.models.Genre
 import ar.edu.unicen.seminarioentregable.ddl.models.Movie

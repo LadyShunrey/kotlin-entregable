@@ -140,7 +140,7 @@
                     android:textStyle="bold"
                     android:textSize="18.sp"
                     android:textAlignment="center"
-                    android:text="An error occcurred, try again"
+                    android:text="@string/error_message"
                     android:layout_marginBottom="24.dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -170,7 +170,7 @@
                     android:id="@+id/no_similar_movies_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No hay películas similares"
+                    android:text="@string/no_similar_movies"
                     android:visibility="@{viewModel.noSimilarMoviesVisible ? View.VISIBLE : View.GONE}"/>
 
                 <androidx.recyclerview.widget.RecyclerView

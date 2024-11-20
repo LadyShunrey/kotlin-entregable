@@ -3,6 +3,7 @@ package ar.edu.unicen.seminarioentregable.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import ar.edu.unicen.seminarioentregable.R
+import ar.edu.unicen.seminarioentregable.app.SeminarioEntregableApp
 import ar.edu.unicen.seminarioentregable.databinding.ActivityMainBinding
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -146,9 +148,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.popularMoviesButton.setOnClickListener {
-            val intent = Intent(this, MoviePLPActivity::class.java)
-
-            startActivity(intent)
+            val application = applicationContext as SeminarioEntregableApp
+            if(application.isNetworkAvailable()) {
+                val intent = Intent(this, MoviePLPActivity::class.java)
+                startActivity(intent)
+            }else {
+                Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+            }
         }
 
         supportFragmentManager.beginTransaction()

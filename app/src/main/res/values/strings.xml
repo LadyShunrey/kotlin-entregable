@@ -12,6 +12,8 @@
 
     <string name="error_message">An error occurred, try again</string>
     <string name="error_no_results_found">No results found for the search</string>
+    <string name="no_internet_connection">No internet conection</string>
+    <string name="no_similar_movies">No similar movies found</string>
 
     <string name="home">Home</string>
     <string name="popular_movies">Popular</string>
@@ -19,8 +21,13 @@
     <string name="wishlist">Wishlist</string>
 
     <string name="add_to_wishlist">Add to wishlist</string>
+    <string name="remove_from_wishlist">Remove</string>
     <string name="movie_added_to_wishlist">Movie added to wishlist</string>
     <string name="similar_movies">Similar movies that may like you</string>
     <string name="share">Share</string>
     <string name="homepage">Movie homepage</string>
+
+    <string name="popular_movies_title">These are the most popular movies right now</string>
+    <string name="trending_movies_title">These are the trending movies this week</string>
+    <string name="wishlist_title">These are your favorite movies</string>
 </resources>
