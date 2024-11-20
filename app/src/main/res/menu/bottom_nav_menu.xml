@@ -15,9 +15,9 @@
 
     <item
         android:id="@+id/trending_movies_fragment"
-        android:title="Trending"
+        android:title="@string/trending_movies"
         android:icon="@drawable/ic_trending_movies"
-        android:contentDescription="Trending"/>
+        android:contentDescription="@string/trending_movies"/>
 
     <item
         android:id="@+id/wishlist_fragment"

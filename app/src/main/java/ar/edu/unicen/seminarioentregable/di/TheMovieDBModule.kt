@@ -2,6 +2,7 @@ package ar.edu.unicen.seminarioentregable.di
 
 import ar.edu.unicen.seminarioentregable.ddl.data.TheMovieDBAPI
 import ar.edu.unicen.seminarioentregable.network.AuthorizationInterceptor
+import ar.edu.unicen.seminarioentregable.network.LanguageInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,7 @@ class TheMovieDBModule {
     fun provideOkHttpClient(token: String): OkHttpClient {
         return Builder()
             .addInterceptor(AuthorizationInterceptor(token))
+            .addInterceptor(LanguageInterceptor())
             .build()
     }
 

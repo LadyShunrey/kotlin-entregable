@@ -51,6 +51,7 @@ class MainViewModel @Inject constructor(
             _loading.value = true
             _error.value = false
             _movie.value = null
+            _posterUrl.value = null
 
             try{
                 val response: Response<MovieAPIResponse> = theMovieRepository.getMovie(title)
@@ -59,15 +60,18 @@ class MainViewModel @Inject constructor(
                     val movieApiResponse = response.body()!!
                     val moviesDTO = movieApiResponse.results
                     val movies = moviesDTO.map { it.toMovie() }
-                    _movie.value = movies.firstOrNull()
 
-                    val posterPath = _movie.value?.poster_path
-                    if(posterPath != null){
-                        _posterUrl.value = "https://image.tmdb.org/t/p/w500$posterPath"
+                    if(movies.isEmpty()){
+                        _error.value = true
                     }else{
-                        null
+                        _movie.value = movies.firstOrNull()
+                        val posterPath = _movie.value?.poster_path
+                        if(posterPath != null){
+                            _posterUrl.value = "https://image.tmdb.org/t/p/w500$posterPath"
+                        }else{
+                            null
+                        }
                     }
-
                 }else{
                     _error.value = true
                 }
@@ -82,15 +86,20 @@ class MainViewModel @Inject constructor(
 
     fun getPopularMovies(page: Int){
         viewModelScope.launch {
-            _loading.value = true
-            _error.value = false
+            try{
+                _loading.value = true
+                _error.value = false
 
-            delay(2000)
-            val popularMovies = theMovieRepository.getPopularMovies(page)
+                delay(2000)
+                val popularMovies = theMovieRepository.getPopularMovies(page)
 
-            _loading.value = false
-            _popularMovies.emit(popularMovies)
-            _error.value = popularMovies == null
+                _loading.value = false
+                _popularMovies.emit(popularMovies)
+                _error.value = popularMovies == null
+            }catch(e: Exception){
+                _error.value = true
+            }
+
         }
     }
 

@@ -35,6 +35,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += listOf("-Xjvm-default=all")
     }
 
     buildFeatures {
@@ -70,6 +71,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.hilt)
     implementation(libs.androidx.tracing.perfetto.handshake)
+    implementation(libs.play.services.basement)
+    implementation(libs.androidx.runner)
     kapt(libs.hilt.compiler)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
@@ -87,6 +90,10 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.5.7")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

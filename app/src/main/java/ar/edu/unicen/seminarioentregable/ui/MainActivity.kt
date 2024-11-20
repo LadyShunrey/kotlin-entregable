@@ -41,7 +41,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.loading.onEach { loading ->
             if(loading){
                 binding.progressBar.visibility = android.view.View.VISIBLE
-                binding.movieInformation.visibility = android.view.View.INVISIBLE
+//                binding.movieInformation.visibility = android.view.View.INVISIBLE
+                if(!viewModel.loading.value){
+                    binding.movieInformation.visibility = android.view.View.INVISIBLE
+                }
+
             }else{
                 binding.progressBar.visibility = android.view.View.INVISIBLE
                 binding.movieInformation.visibility = android.view.View.VISIBLE
@@ -56,6 +60,11 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.error.onEach { error ->
             if(error){
+                if(viewModel.movie.value == null && viewModel.posterUrl.value == null){
+                    binding.error.text = getString(R.string.error_no_results_found)
+                }else{
+                    binding.error.text = getString(R.string.error_message)
+                }
                 binding.error.visibility = android.view.View.VISIBLE
             }else{
                 binding.error.visibility = android.view.View.INVISIBLE
@@ -65,6 +74,20 @@ class MainActivity : AppCompatActivity() {
         binding.searchMovieEditText.addTextChangedListener { text ->
             val isValid = text.toString() != null
             binding.searchMovieButton.isEnabled = isValid
+
+            if(text.toString().isEmpty()){
+                binding.movieTitle.visibility = android.view.View.INVISIBLE
+                binding.movieLanguage.visibility = android.view.View.INVISIBLE
+                binding.movieOverview.visibility = android.view.View.INVISIBLE
+                binding.moviePoster.visibility = android.view.View.INVISIBLE
+                binding.error.visibility = android.view.View.INVISIBLE
+            }else{
+                binding.movieTitle.visibility = android.view.View.VISIBLE
+                binding.movieLanguage.visibility = android.view.View.VISIBLE
+                binding.movieOverview.visibility = android.view.View.VISIBLE
+                binding.moviePoster.visibility = android.view.View.VISIBLE
+                binding.error.visibility = android.view.View.INVISIBLE
+            }
         }
 
         binding.searchMovieButton.setOnClickListener {

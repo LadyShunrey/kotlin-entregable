@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20.dp"
-                    android:text="Welcome to The Movie Database"
+                    android:text="@string/welcome_text"
                     android:textStyle="bold"
                     android:textSize="30.sp"
                     android:textAlignment="center"
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60.dp"
-                    android:text="Go to popular movies"
+                    android:text="@string/go_to_popular_movies_text"
                     android:textStyle="bold"
                     android:textSize="24.sp"
                     android:textAlignment="center"
@@ -64,7 +64,7 @@
                     android:id="@+id/popular_movies_button"
                     android:layout_width="150.dp"
                     android:layout_height="wrap_content"
-                    android:text="Popular movies"
+                    android:text="@string/popular_movies_button"
                     android:layout_marginTop="20.dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50.dp"
-                    android:text="Search for a movie"
+                    android:text="@string/search_movie_text"
                     android:textStyle="bold"
                     android:textSize="24.sp"
                     android:textAlignment="center"
@@ -90,7 +90,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="20.dp"
-                    android:hint="Enter a movie name"
+                    android:hint="@string/enter_a_movie_name_input"
                     android:inputType="text"
                     app:layout_constraintTop_toBottomOf="@id/search_movie_text"/>
 
@@ -98,11 +98,36 @@
                     android:id="@+id/search_movie_button"
                     android:layout_width="150.dp"
                     android:layout_height="wrap_content"
-                    android:text="Search"
+                    android:text="@string/search_movie_text"
                     android:layout_marginTop="12.dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/search_movie_edit_text"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48.dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/search_movie_button"
+                    app:layout_constraintBottom_toTopOf="@id/movie_poster"/>
+
+                <TextView
+                    android:id="@+id/error"
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.dp"
+                    android:textStyle="bold"
+                    android:textSize="18.sp"
+                    android:textAlignment="center"
+                    android:text="An error occcurred, try again"
+                    android:layout_marginBottom="24.dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/movie_list"
@@ -145,30 +170,6 @@
                     android:scaleType="fitCenter"
                     android:layout_marginTop="12.dp"
                     app:imageUrl="@{viewModel.posterUrl}"/>
-
-                <ProgressBar
-                    android:id="@+id/progress_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="48.dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/search_movie_button"/>
-
-                <TextView
-                    android:id="@+id/error"
-                    android:visibility="invisible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12.dp"
-                    android:textStyle="bold"
-                    android:textSize="18.sp"
-                    android:textAlignment="center"
-                    android:text="An error occcurred, try again"
-                    android:layout_marginBottom="24.dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </LinearLayout>
 

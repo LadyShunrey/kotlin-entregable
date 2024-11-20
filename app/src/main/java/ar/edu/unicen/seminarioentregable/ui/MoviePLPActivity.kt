@@ -8,8 +8,10 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import ar.edu.unicen.seminarioentregable.R
 import ar.edu.unicen.seminarioentregable.databinding.ActivityMovieplpBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -97,6 +99,15 @@ class MoviePLPActivity: AppCompatActivity() {
             lifecycleScope.launch {
                 viewModel.pager.collect { pagingData ->
                     movieAdapter.submitData(pagingData)
+                    movieAdapter.loadStateFlow.collect { loadStates ->
+                        val errorState = loadStates.refresh is LoadState.Error
+                        if (errorState) {
+                            binding.error.visibility = android.view.View.VISIBLE
+                            binding.error.text = getString(R.string.error_message)
+                        }else{
+                            binding.error.visibility = android.view.View.GONE
+                        }
+                    }
                 }
             }
         }.launchIn(lifecycleScope)

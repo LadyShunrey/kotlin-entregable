@@ -67,6 +67,10 @@ class PopularMoviesFragment: Fragment() {
                 }
             }catch(e: Exception){
                 Log.e("PopularMoviesFragment", "Error al actualizar la lista", e)
+                binding.error.visibility = View.VISIBLE
+                binding.movieList.visibility = View.INVISIBLE
+                binding.progressBar.visibility = View.INVISIBLE
+                binding.error.text = getString(R.string.error_message)
             }
         }.launchIn(lifecycleScope)
 
