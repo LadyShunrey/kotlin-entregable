@@ -32,6 +32,9 @@ class MoviePDPActivity: AppCompatActivity()  {
                 binding.moviePoster.visibility = android.view.View.INVISIBLE
                 binding.movieRating.visibility = android.view.View.INVISIBLE
                 binding.movieGenre.visibility = android.view.View.INVISIBLE
+                binding.wishlistMessage.visibility = android.view.View.INVISIBLE
+                binding.addToWishlistButton.visibility = android.view.View.INVISIBLE
+                binding.error.visibility = android.view.View.INVISIBLE
             }else{
                 binding.progressBar.visibility = android.view.View.INVISIBLE
                 binding.movieTitle.visibility = android.view.View.VISIBLE
@@ -39,6 +42,8 @@ class MoviePDPActivity: AppCompatActivity()  {
                 binding.moviePoster.visibility = android.view.View.VISIBLE
                 binding.movieRating.visibility = android.view.View.VISIBLE
                 binding.movieGenre.visibility = android.view.View.VISIBLE
+                binding.wishlistMessage.visibility = android.view.View.INVISIBLE
+                binding.addToWishlistButton.visibility = android.view.View.VISIBLE
             }
         }.launchIn(lifecycleScope)
 
@@ -74,6 +79,8 @@ class MoviePDPActivity: AppCompatActivity()  {
 
         binding.addToWishlistButton.setOnClickListener {
             viewModel.addToWishlist(movie)
+            binding.wishlistMessage.visibility = android.view.View.VISIBLE
+            binding.addToWishlistButton.isEnabled = false
         }
 
     }

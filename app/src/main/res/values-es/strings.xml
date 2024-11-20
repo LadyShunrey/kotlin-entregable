@@ -20,5 +20,6 @@
     <string name="wishlist">Favoritos</string>
 
     <string name="add_to_wishlist">Agregar a favoritos</string>
+    <string name="movie_added_to_wishlist">Película agregada a favoritos</string>
 
 </resources>

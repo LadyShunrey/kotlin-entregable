@@ -19,4 +19,5 @@
     <string name="wishlist">Wishlist</string>
 
     <string name="add_to_wishlist">Add to wishlist</string>
+    <string name="movie_added_to_wishlist">Movie added to wishlist</string>
 </resources>

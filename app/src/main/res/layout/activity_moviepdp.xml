@@ -15,105 +15,136 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
-        <ImageView
-            android:id="@+id/movie_poster"
-            android:layout_width="200.dp"
-            android:layout_height="300.dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintTop_toBottomOf="@id/movie_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24.dp"
-            android:contentDescription="@null"/>
-        
-        <TextView
-            android:id="@+id/movie_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20.dp"
-            android:textStyle="bold"
-            android:textSize="24.sp"
-            android:textAlignment="textStart"
-            tools:text="Movie TITLE"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/movie_overview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="14.sp"
-            android:textAlignment="textStart"
-            tools:text="Movie overview"
-            android:paddingHorizontal="20.dp"
-            android:layout_marginTop="30.dp"
-            app:layout_constraintTop_toBottomOf="@id/movie_poster"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:textAlignment="center"
+                android:layout_marginTop="48.dp"
+                android:layout_marginHorizontal="48.dp"
+                android:gravity="center_horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/movie_genre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="14.sp"
-            android:textAlignment="textStart"
-            tools:text="Movie genre"
-            android:paddingHorizontal="20.dp"
-            android:layout_marginTop="30.dp"
-            app:layout_constraintTop_toBottomOf="@id/movie_overview"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+                <ImageView
+                    android:id="@+id/movie_poster"
+                    android:layout_width="200.dp"
+                    android:layout_height="300.dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintTop_toBottomOf="@id/movie_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="24.dp"
+                    android:contentDescription="@null"/>
 
-        <TextView
-            android:id="@+id/movie_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="14.sp"
-            android:textAlignment="textStart"
-            tools:text="Movie rating"
-            android:paddingHorizontal="20.dp"
-            android:layout_marginTop="30.dp"
-            app:layout_constraintTop_toBottomOf="@id/movie_genre"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+                <TextView
+                    android:id="@+id/movie_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20.dp"
+                    android:textStyle="bold"
+                    android:textSize="24.sp"
+                    android:textAlignment="textStart"
+                    tools:text="Movie TITLE"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48.dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_title"/>
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/movie_title"/>
 
-        <TextView
-            android:id="@+id/error"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12.dp"
-            android:textStyle="bold"
-            android:textSize="18.sp"
-            android:textAlignment="center"
-            android:text="An error occcurred, try again"
-            android:layout_marginBottom="24.dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+                <TextView
+                    android:id="@+id/movie_overview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="14.sp"
+                    android:textAlignment="textStart"
+                    tools:text="Movie overview"
+                    android:paddingHorizontal="20.dp"
+                    android:layout_marginTop="30.dp"
+                    app:layout_constraintTop_toBottomOf="@id/movie_poster"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-        <Button
-            android:id="@+id/add_to_wishlist_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48.dp"
-            app:layout_constraintTop_toBottomOf="@id/movie_rating"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/add_to_wishlist"/>
+                <TextView
+                    android:id="@+id/movie_genre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="14.sp"
+                    android:textAlignment="textStart"
+                    tools:text="Movie genre"
+                    android:paddingHorizontal="20.dp"
+                    android:layout_marginTop="30.dp"
+                    app:layout_constraintTop_toBottomOf="@id/movie_overview"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
+                <TextView
+                    android:id="@+id/movie_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="14.sp"
+                    android:textAlignment="textStart"
+                    tools:text="Movie rating"
+                    android:paddingHorizontal="20.dp"
+                    android:layout_marginTop="30.dp"
+                    app:layout_constraintTop_toBottomOf="@id/movie_genre"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <Button
+                    android:id="@+id/add_to_wishlist_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.dp"
+                    app:layout_constraintTop_toBottomOf="@id/movie_rating"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/add_to_wishlist"/>
+
+                <TextView
+                    android:id="@+id/wishlist_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/movie_added_to_wishlist"
+                    android:visibility="invisible"
+                    android:textStyle="bold"
+                    android:textSize="18.sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_to_wishlist_button"/>
+
+                <TextView
+                    android:id="@+id/error"
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.dp"
+                    android:textStyle="bold"
+                    android:textSize="18.sp"
+                    android:textAlignment="center"
+                    android:text="An error occcurred, try again"
+                    android:layout_marginBottom="24.dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
