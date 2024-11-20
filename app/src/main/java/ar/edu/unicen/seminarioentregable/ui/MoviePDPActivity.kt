@@ -1,6 +1,7 @@
 package ar.edu.unicen.seminarioentregable.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -102,5 +103,32 @@ class MoviePDPActivity: AppCompatActivity()  {
                 movieAdapter.submitList(movies)
             }
         }.launchIn(lifecycleScope)
+
+        viewModel.shareMovieEvent.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { movie ->
+                val shareIntent = Intent(Intent.ACTION_SEND)
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Mira esta película: ${movie.title}\n\n${movie.overview}")
+                startActivity(Intent.createChooser(shareIntent, "Compartir película"))
+            }
+        }
+
+        viewModel.openHomepageEvent.observe(this) { event ->
+            event?.getContentIfNotHandled()?.let { homepage ->
+                val homepageIntent = Intent(Intent.ACTION_VIEW, Uri.parse(homepage))
+                startActivity(homepageIntent)
+            }
+        }
+
+        binding.shareButton.setOnClickListener {
+            viewModel.shareMovie()
+        }
+
+        binding.homepageButton.setOnClickListener {
+            viewModel.openHomepage()
+        }
+
+
     }
+
 }

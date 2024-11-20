@@ -9,7 +9,8 @@ class MovieDetailsAPIResponse(
     val overview: String,
     val poster_path: String?,
     val vote_average: Double?,
-    val genres: List<Genre>
+    val genres: List<Genre>,
+    val homepage: String?
 ) {
 
 }

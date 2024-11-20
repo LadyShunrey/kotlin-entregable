@@ -21,4 +21,6 @@
     <string name="add_to_wishlist">Add to wishlist</string>
     <string name="movie_added_to_wishlist">Movie added to wishlist</string>
     <string name="similar_movies">Similar movies that may like you</string>
+    <string name="share">Share</string>
+    <string name="homepage">Movie homepage</string>
 </resources>

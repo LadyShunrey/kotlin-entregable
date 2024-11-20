@@ -18,7 +18,9 @@ class MovieDetailsDTO(
     @SerializedName("vote_average")
     val vote_average: Double?,
     @SerializedName("genres")
-    val genres: List<Genre>
+    val genres: List<Genre>,
+    @SerializedName("homepage")
+    val homepage: String? = null
 ) {
     fun toMovie(): Movie {
         return Movie(
@@ -28,7 +30,8 @@ class MovieDetailsDTO(
             overview = overview,
             poster_path = poster_path,
             vote_average = vote_average,
-            genres = genres
+            genres = genres,
+            homepage = homepage
         )
     }
 }
